@@ -1,6 +1,12 @@
+import NavbarOthers from "../components/NavbarOthers";
+import SearchBar from "../components/SearchBar";
+
 const Dashboard = () => {
-    return(
-        <h1>Dashboard Page</h1>
+    return (
+        <>
+            <NavbarOthers />
+            <SearchBar />
+        </>
     )
 }
 
