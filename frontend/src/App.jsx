@@ -12,8 +12,6 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <>
-      {/* Shared UI */}
-      <Navbar />
       <Routes>
         {/* any one of the route will be executed at a time */}
         <Route index element={<Home />} />
