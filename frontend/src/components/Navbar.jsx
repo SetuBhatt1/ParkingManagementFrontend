@@ -28,8 +28,12 @@ export default function Navbar() {
     };
 
     const handleTabClick = (tab) => {
+        if (tab == activeTab) {
+            return;
+        }
         setActiveTab(tab);
     };
+
 
     return (
         <>
@@ -52,8 +56,7 @@ export default function Navbar() {
                         <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0 fs-5">
                             <MDBNavbarItem>
                                 <MDBNavbarLink
-                                    active={activeTab === "home"}
-                                    onClick={() => handleTabClick("home")}
+                                    onClick={() => setActiveTab('home')} active={activeTab === 'home'}
                                     href="/"
                                 >
                                     Home
