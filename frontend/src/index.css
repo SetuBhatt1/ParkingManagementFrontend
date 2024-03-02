@@ -68,3 +68,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.blur-background {
+  filter: blur(2px); /* Adjust the blur intensity as needed */
+  pointer-events: fill;
+}

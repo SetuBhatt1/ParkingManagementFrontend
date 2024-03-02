@@ -8,6 +8,7 @@ import Floor0 from './pages/Floor0';
 import Floor1 from './pages/Floor1';
 import Floor2 from './pages/Floor2';
 import Navbar from './components/Navbar';
+import Modal from './components/Modal';
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
         <Route path='/floor0' element={<Floor0 />} />
         <Route path='/floor1' element={<Floor1 />} />
         <Route path='/floor2' element={<Floor2 />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard />} />        
+        <Route path='/modal' element={<Modal />} />        
+
       </Routes>
     </>
   );

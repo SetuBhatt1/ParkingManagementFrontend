@@ -8,26 +8,22 @@ import {
     MDBBtn
 } from 'mdb-react-ui-kit';
 
-export default function Card(props) {
+export default function Card({ carNumber, entryTime, exitTime }) {
     return (
         <MDBCard className='m-2'>
             <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/184.webp' position='top' alt='...' />
 
             <MDBCardBody>
                 <MDBCardText>
-                    Car ID : {props.carNumber}
+                    Car Number: {carNumber}
                 </MDBCardText>
                 <MDBCardText>
-                    Entry Time : {props.entryTime}
+                    Entry Time: {new Date(entryTime).toLocaleString()}
                 </MDBCardText>
                 <MDBCardText>
-                    Exit Time : {props.exitTime}
-                </MDBCardText>
-                <MDBCardText>
-                    Date : {props.date}
+                    Exit Time: {new Date(exitTime).toLocaleString()}
                 </MDBCardText>
             </MDBCardBody>
         </MDBCard>
     );
 }
-
