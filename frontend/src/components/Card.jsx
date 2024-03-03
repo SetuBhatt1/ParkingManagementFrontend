@@ -10,8 +10,8 @@ import {
 
 export default function Card({ carNumber, entryTime, exitTime }) {
     return (
-        <MDBCard className='m-2'>
-            <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/184.webp' position='top' alt='...' />
+        <MDBCard className='m-2' style={{ backgroundColor: "#9FA8DA" }}>
+            {/* <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/184.webp' position='top' alt='...' /> */}
 
             <MDBCardBody>
                 <MDBCardText>
