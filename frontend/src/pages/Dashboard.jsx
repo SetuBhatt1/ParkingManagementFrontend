@@ -15,11 +15,11 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
 
-        // const response = await axios.get("https://ea68-150-129-170-239.ngrok-free.app/vehicle/read");
+        // const response = await axios.get("https://ea68-150-129-170-239.ngrok-free.app/api/vehicles");
         // console.log(response);
         // setCarData(response.data);
 
-        const response = await fetch('http://localhost:8080/vehicle/read', {
+        const response = await fetch('http://localhost:8080/api/vehicles', {
           method: "GET"
         });
 

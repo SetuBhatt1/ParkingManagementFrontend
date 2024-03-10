@@ -37,7 +37,7 @@ export default function SingleFloor() {
     const toggleOpen = () => setBasicModal(!basicModal);
 
     const sendDataOnPark = async () => {
-        const data = await fetch("http://localhost:8080/vehicle/add", {
+        const data = await fetch("http://localhost:8080/api/vehicles", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export default function SingleFloor() {
 
     const removeDataOnUnpark = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/vehicle/remove/${carNumber}`, {
+            const response = await fetch(`http://localhost:8080/api/vehicles/${carNumber}`, {
                 method: "DELETE",
             });
 
@@ -67,10 +67,8 @@ export default function SingleFloor() {
                 console.error("Failed to remove vehicle");
             }
 
-
             setIsAvailable(prevState => !prevState); // Toggle the state
             setBasicModal(false);
-
 
         } catch (error) {
             console.error('Error removing vehicle:', error);
@@ -110,7 +108,7 @@ export default function SingleFloor() {
                             ) : (
                                 <p style={{ margin: "20px", padding: "10px" }}>Car Number: {carNumber}</p>
                             )}
-                            {isAvailable ? (
+                            {/* {isAvailable ? (
                                 <MDBInput
                                     style={{ margin: "20px", padding: "10px" }}
                                     label="Entry Time"
@@ -124,7 +122,7 @@ export default function SingleFloor() {
                                     value={exitTime}
                                     onChange={(e) => setExitTime(e.target.value)}
                                 />
-                            )}
+                            )} */}
                         </MDBModalBody>
                         <MDBModalFooter>
                             <MDBBtn color='secondary' onClick={toggleOpen}>
