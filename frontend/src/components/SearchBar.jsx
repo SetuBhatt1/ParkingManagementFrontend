@@ -1,36 +1,34 @@
 // SearchBar.js
 import React, { useState } from 'react';
-import axios from 'axios'; 
-import { MDBInputGroup, MDBIcon } from 'mdb-react-ui-kit';
+import axios from 'axios';
+import { MDBInputGroup, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 export default function SearchBar({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [query, setQuery] = useState('');
+  // const [results, setResults] = useState([]);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchSubmit = async (event) => {
-    event.preventDefault();
+  const searchVehicle = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:8080/search/car/${searchTerm}`);
-      onSearch(response.data);
+      console.log("called search function")
+      const response = await axios.get(`http://localhost:8080/api/vehicles/search?vehicleNumber=${query}`);
+      console.log("searched successfully")
+      onSearch(response.data)
     } catch (error) {
-      console.error('Error searching for cars:', error);
+      console.error('Error fetching data: ', error);
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSearchSubmit}>
+    <form onSubmit={searchVehicle}>
       <MDBInputGroup className='square border border-0' style={{ width: '50vw' }}>
         <input
           className='form-control w-50'
           type='text'
           placeholder='Search'
-          value={searchTerm}
-          onChange={handleSearchChange}
+          value={query} onChange={e => setQuery(e.target.value)}
         />
-        <MDBIcon fas icon='search' className='p-2 border border-0' size='1x' style={{ backgroundColor: "#7986CB" }} />
+        <MDBBtn fas icon='search' size='1x' style={{ backgroundColor: "#7986CB" }}>Search</MDBBtn>
       </MDBInputGroup>
     </form>
   );

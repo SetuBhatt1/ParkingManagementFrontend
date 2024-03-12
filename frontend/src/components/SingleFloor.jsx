@@ -20,6 +20,9 @@ export default function SingleFloor() {
     const [slotNumber, setSlotNumber] = useState('');
     const [floorNumber, setFloorNumber] = useState('');
     const [isAvailable, setIsAvailable] = useState(true);
+    const [slotStatus, setSlotStatus] = useState('');
+    const [validationError, setValidationError] = useState('');
+
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -38,7 +41,32 @@ export default function SingleFloor() {
 
     const toggleOpen = () => setBasicModal(!basicModal);
 
+    const fetchData = async () => {
+        const response = await fetch(`http://localhost:8080/api/slots/${slotNumber}`, {
+            method: "GET",
+        });
+        const data = await response.json();
+        setSlotStatus(data.status);
+    };
+
+    const validateInputs = () => {
+        if (!carNumber || !slotNumber || !floorNumber) {
+            setValidationError('All fields are required.');
+            return false;
+        }
+        if (slotStatus === "OCCUPIED") {
+            setValidationError("Slot is already occupied. Please choose another slot.");
+            return false;
+        }
+        setValidationError('');
+        return true;
+    };
+
     const sendDataOnPark = async () => {
+        if (!validateInputs()) {
+            return;
+        }
+
         const slotData = {
             slotNumber: slotNumber,
             status: 'occupied',
@@ -113,6 +141,9 @@ export default function SingleFloor() {
                             <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
                         </MDBModalHeader>
                         <MDBModalBody>
+                            {validationError && (
+                                <p style={{ color: 'red', marginBottom: '10px' }}>{validationError}</p>
+                            )}
                             {isAvailable ? (
                                 <>
                                     <MDBInput
@@ -127,6 +158,7 @@ export default function SingleFloor() {
                                         label="Slot Number"
                                         value={slotNumber}
                                         onChange={(e) => setSlotNumber(e.target.value)}
+                                        onBlur={fetchData}
                                     />
                                     <MDBInput
                                         style={{ margin: "20px", padding: "10px" }}
