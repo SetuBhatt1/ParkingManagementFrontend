@@ -17,6 +17,8 @@ export default function SingleFloor() {
     const [carNumber, setCarNumber] = useState('');
     const [entryTime, setEntryTime] = useState('');
     const [exitTime, setExitTime] = useState('');
+    const [slotNumber, setSlotNumber] = useState('');
+    const [floorNumber, setFloorNumber] = useState('');
     const [isAvailable, setIsAvailable] = useState(true);
     const inputRef = useRef(null);
 
@@ -37,12 +39,26 @@ export default function SingleFloor() {
     const toggleOpen = () => setBasicModal(!basicModal);
 
     const sendDataOnPark = async () => {
+        const slotData = {
+            slotNumber: slotNumber,
+            status: 'occupied',
+            floor: {
+                floorNumber: floorNumber
+            }
+        };
+
         const data = await fetch("http://localhost:8080/api/vehicles", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "vehicleNumber": carNumber })
+            body: JSON.stringify({
+                vehicleNumber: carNumber,
+                slot: slotData,
+                floor: {
+                    floorNumber: floorNumber
+                }
+            })
         });
 
         console.log("sent data successfully");
@@ -98,31 +114,34 @@ export default function SingleFloor() {
                         </MDBModalHeader>
                         <MDBModalBody>
                             {isAvailable ? (
-                                <MDBInput
-                                    style={{ margin: "20px", padding: "10px" }}
-                                    label="Car Number"
-                                    value={carNumber}
-                                    onChange={(e) => setCarNumber(e.target.value)}
-                                    ref={inputRef}
-                                />
+                                <>
+                                    <MDBInput
+                                        style={{ margin: "20px", padding: "10px" }}
+                                        label="Car Number"
+                                        value={carNumber}
+                                        onChange={(e) => setCarNumber(e.target.value)}
+                                        ref={inputRef}
+                                    />
+                                    <MDBInput
+                                        style={{ margin: "20px", padding: "10px" }}
+                                        label="Slot Number"
+                                        value={slotNumber}
+                                        onChange={(e) => setSlotNumber(e.target.value)}
+                                    />
+                                    <MDBInput
+                                        style={{ margin: "20px", padding: "10px" }}
+                                        label="Floor Number"
+                                        value={floorNumber}
+                                        onChange={(e) => setFloorNumber(e.target.value)}
+                                    />
+                                </>
                             ) : (
-                                <p style={{ margin: "20px", padding: "10px" }}>Car Number: {carNumber}</p>
+                                <>
+                                    <p style={{ margin: "20px", padding: "10px" }}>Car Number: {carNumber}</p>
+                                    <p style={{ margin: "20px", padding: "10px" }}>Slot Number: {slotNumber}</p>
+                                    <p style={{ margin: "20px", padding: "10px" }}>Floor Number: {floorNumber}</p>
+                                </>
                             )}
-                            {/* {isAvailable ? (
-                                <MDBInput
-                                    style={{ margin: "20px", padding: "10px" }}
-                                    label="Entry Time"
-                                    value={entryTime}
-                                    onChange={(e) => setEntryTime(e.target.value)}
-                                />
-                            ) : (
-                                <MDBInput
-                                    style={{ margin: "20px", padding: "10px" }}
-                                    label='Exit Time'
-                                    value={exitTime}
-                                    onChange={(e) => setExitTime(e.target.value)}
-                                />
-                            )} */}
                         </MDBModalBody>
                         <MDBModalFooter>
                             <MDBBtn color='secondary' onClick={toggleOpen}>
