@@ -107,6 +107,17 @@ export default function NavbarOthers() {
                                     </MDBDropdownMenu>
                                 </MDBDropdown>
                             </MDBNavbarItem>
+                            <MDBNavbarItem>
+                                <MDBBtn
+                                    className="px-4 ms-2 me-1"
+
+                                    style={{ backgroundColor: "#9FA8DA" }}
+                                    onClick={handleOpen}
+                                >
+                                    <MDBNavbarLink>Logout</MDBNavbarLink>
+                                </MDBBtn>
+                            </MDBNavbarItem>
+
                         </MDBNavbarNav>
                     </MDBCollapse>
                 </MDBContainer>
