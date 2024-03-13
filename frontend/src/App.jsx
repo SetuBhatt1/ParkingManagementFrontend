@@ -19,9 +19,7 @@ function App() {
         <Route path='/floor0' element={<Floor0 />} />
         <Route path='/floor1' element={<Floor1 />} />
         <Route path='/floor2' element={<Floor2 />} />
-        <Route path='/dashboard' element={<Dashboard />} />        
-        <Route path='/modal' element={<Modal />} />        
-
+        <Route path='/dashboard' element={<Dashboard />} />           
       </Routes>
     </>
   );

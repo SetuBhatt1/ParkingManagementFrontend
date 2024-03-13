@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import LoginSignupButton from '../components/auth/LoginSignupButton';
+import AuthDetails from '../components/AuthDetails';
 
 const Home = () => {
     return (
@@ -20,7 +21,9 @@ const Home = () => {
                 </video> */}
                 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2 }}>
                     <LoginSignupButton />
+                    <AuthDetails/>
                 </div>
+                
             </div>
         </>
     );
