@@ -1,17 +1,27 @@
 import React from 'react';
-import Carousel from "../components/Carousel";
-import Form from "../components/Form";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
-import Navbar from '../components/Navbar';
+import LoginSignupButton from '../components/auth/LoginSignupButton';
 
 const Home = () => {
     return (
         <>
-      <Navbar/>
-            <MDBContainer fluid style={{ backgroundColor: "#E3F2FD", width: "100vw", height: "100vh", position: "fixed", top: "0px", left: "0px", display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                <div style={{ position: "relative", top: "25vh", height: "fit-content" }}><Carousel /></div>
-                <div style={{ width: "25vw", height: "55vh", position: "relative", top: "25vh", flexGrow: 0.25, marginLeft: "50px", marginRight: "50px" }}><Form /></div>
-            </MDBContainer>
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
+                {/* <video autoPlay loop muted style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                }}>
+                    <source src="https://s3.amazonaws.com/random-static.parkwhiz/videos/home-header-3.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video> */}
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2 }}>
+                    <LoginSignupButton />
+                </div>
+            </div>
         </>
     );
 }
