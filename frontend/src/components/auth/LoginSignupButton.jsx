@@ -4,12 +4,42 @@ import {
     MDBCol, MDBBtn, MDBIcon, MDBInput, MDBCheckbox
 } from 'mdb-react-ui-kit';
 
+import { auth } from '../../firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+
 const LoginSignupButton = () => {
+
+    const [loginEmail, setLoginEmail] = useState('')
+    const [loginPwd, setLoginPwd] = useState('')
+
+    const [signupEmail, setSignupEmail] = useState('')
+    const [signupPwd, setSignupPwd] = useState('')
+
     const [loginRegisterActive, setLoginRegisterActive] = useState('login');
 
     const handleLoginRegisterClick = (tab) => {
         setLoginRegisterActive(tab);
     };
+
+    const LoginSubmit = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, loginEmail, loginPwd)
+            .then((userCredential) => {
+                console.log(userCredential)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const SignupSubmit = (e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth,signupEmail,signupPwd)
+        .then((userCredential) => {
+            console.log(userCredential)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
 
     return (
         <div style={{ maxWidth: '500px', margin: 'auto', padding: '20px' }}>
@@ -40,8 +70,8 @@ const LoginSignupButton = () => {
             <div>
                 {loginRegisterActive === 'login' && (
                     <div>
-                        <form>
-                            <div className='text-center mb-3'>
+                        <form onSubmit={LoginSubmit}>
+                            {/* <div className='text-center mb-3'>
                                 <p>Sign up with:</p>
                                 <MDBBtn floating color="secondary" className='mx-1'>
                                     <MDBIcon fab icon='facebook-f' />
@@ -56,19 +86,19 @@ const LoginSignupButton = () => {
                                     <MDBIcon fab icon='github' />
                                 </MDBBtn>
                             </div>
-                            <p className='text-center'>or:</p>
-                            <MDBInput className='mb-4' type='email' id='form7Example1' label='Email address' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} />
-                            <MDBInput className='mb-4' type='password' id='form7Example2' label='Password' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} />
-                            <MDBBtn type='submit' className='mb-4' block color="primary">
-                                Sign in
+                            <p className='text-center'>or:</p> */}
+                            <MDBInput className='mb-4' type='email' id='form7Example1' label='Email address' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                            <MDBInput className='mb-4' type='password' id='form7Example2' label='Password' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} value={loginPwd} onChange={(e) => setLoginPwd(e.target.value)} />
+                            <MDBBtn type='submit' className='mb-4' block color="primary" >
+                                Login
                             </MDBBtn>
                         </form>
                     </div>
                 )}
                 {loginRegisterActive === 'register' && (
                     <div>
-                        <form>
-                            <div className='text-center mb-3'>
+                        <form onSubmit={SignupSubmit}>
+                            {/* <div className='text-center mb-3'>
                                 <p>Sign up with:</p>
                                 <MDBBtn floating color="secondary" className='mx-1'>
                                     <MDBIcon fab icon='facebook-f' />
@@ -83,12 +113,11 @@ const LoginSignupButton = () => {
                                     <MDBIcon fab icon='github' />
                                 </MDBBtn>
                             </div>
-                            <p className='text-center'>or:</p>
-                            <MDBInput className='mb-4' type='email' id='form8Example3' label='Email address' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} />
-                            <MDBInput className='mb-4' type='password' id='form8Example4' label='Password' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} />
-                            <MDBInput className='mb-4' type='password' id='form8Example5' label='Repeat password' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} />
-                            <MDBBtn type='submit' className='mb-4' block color="primary">
-                                Sign in
+                            <p className='text-center'>or:</p> */}
+                            <MDBInput className='mb-4' type='email' id='form8Example3' label='Email address' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
+                            <MDBInput className='mb-4' type='password' id='form8Example4' label='Password' style={{ backgroundColor: '#f8f9fa', height: '50px', color: '#333', borderColor: '#333' }} value={signupPwd} onChange={(e) => setSignupPwd(e.target.value)} />
+                            <MDBBtn type='submit' className='mb-4' block color="primary" >
+                                Signup
                             </MDBBtn>
                         </form>
                     </div>
