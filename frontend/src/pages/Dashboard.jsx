@@ -4,17 +4,23 @@ import Card from "../components/Card";
 import NavbarOthers from "../components/NavbarOthers";
 import SearchBar from "../components/SearchBar";
 import Sort from "../components/Sort";
+import { useNavigate } from 'react-router-dom';
+import { auth } from "../firebase";
 
 const Dashboard = () => {
- const [carData, setCarData] = useState([]);
- const [searchResults, setSearchResults] = useState([]);
- const [hasSearched, setHasSearched] = useState(false);
- const [sortedResults, setSortedResults] = useState([]);
+  const [carData, setCarData] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [sortedResults, setSortedResults] = useState([]);
 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/vehicles");
+        const idToken = await auth.currentUser.getIdToken();
+        console.log(idToken)
+        const response = await axios.get("http://localhost:8080/api/vehicles", {
+          headers: { Authorization: `Bearer ${idToken}` },
+        });
         setCarData(response.data);
       } catch (error) {
         console.error("Error fetching car data:", error);
@@ -22,27 +28,27 @@ const Dashboard = () => {
     };
 
     fetchData();
- }, []);
+  }, []);
 
- const handleSearchResults = (results) => {
+  const handleSearchResults = (results) => {
     setSearchResults(results);
     setHasSearched(true);
- };
+  };
 
- const handleSortedResults = (sorted) => {
+  const handleSortedResults = (sorted) => {
     setSortedResults(sorted);
     setHasSearched(true);
- };
+  };
 
- const resetSearchResults = () => {
+  const resetSearchResults = () => {
     setSearchResults([]);
     setSortedResults([]);
     setHasSearched(false);
- };
+  };
 
- const displayData = hasSearched ? (sortedResults.length > 0 ? sortedResults : searchResults) : carData;
+  const displayData = hasSearched ? (sortedResults.length > 0 ? sortedResults : searchResults) : carData;
 
- return (
+  return (
     <>
       <div style={{ display: "flex", flexDirection: "column", height: "100vh", backgroundColor: "#64B5F6" }}>
         <div>
@@ -89,10 +95,10 @@ const Dashboard = () => {
             {Array.isArray(displayData) && displayData.length > 0 ? (
               displayData.map((car) => (
                 <Card
-                 key={car.vehicleNumber}
-                 carNumber={car.vehicleNumber}
-                 entryTime={car.entryTime}
-                 exitTime={car.exitTime}
+                  key={car.vehicleNumber}
+                  carNumber={car.vehicleNumber}
+                  entryTime={car.entryTime}
+                  exitTime={car.exitTime}
                 />
               ))
             ) : (
@@ -103,7 +109,7 @@ const Dashboard = () => {
 
       </div>
     </>
- );
+  );
 };
 
 export default Dashboard;

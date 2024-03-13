@@ -9,17 +9,18 @@ import Floor1 from './pages/Floor1';
 import Floor2 from './pages/Floor2';
 import Navbar from './components/Navbar';
 import Modal from './components/Modal';
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 function App() {
-  return (
+ return (
     <>
       <Routes>
-        {/* any one of the route will be executed at a time */}
         <Route index element={<Home />} />
-        <Route path='/floor0' element={<Floor0 />} />
-        <Route path='/floor1' element={<Floor1 />} />
-        <Route path='/floor2' element={<Floor2 />} />
-        <Route path='/dashboard' element={<Dashboard />} />           
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/floor0" element={<ProtectedRoute><Floor0 /></ProtectedRoute>} />
+        <Route path="/floor1" element={<ProtectedRoute><Floor1 /></ProtectedRoute>} />
+        <Route path="/floor2" element={<ProtectedRoute><Floor2 /></ProtectedRoute>} />
       </Routes>
     </>
   );

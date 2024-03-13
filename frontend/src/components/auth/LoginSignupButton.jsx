@@ -4,6 +4,8 @@ import {
     MDBCol, MDBBtn, MDBIcon, MDBInput, MDBCheckbox
 } from 'mdb-react-ui-kit';
 
+import { useNavigate } from 'react-router-dom';
+
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -14,6 +16,8 @@ const LoginSignupButton = () => {
 
     const [signupEmail, setSignupEmail] = useState('')
     const [signupPwd, setSignupPwd] = useState('')
+
+    const navigate = useNavigate();
 
     const [loginRegisterActive, setLoginRegisterActive] = useState('login');
 
@@ -26,6 +30,7 @@ const LoginSignupButton = () => {
         signInWithEmailAndPassword(auth, loginEmail, loginPwd)
             .then((userCredential) => {
                 console.log(userCredential)
+                navigate('/dashboard');
             }).catch((error) => {
                 console.log(error)
             })

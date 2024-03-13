@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { MDBInputGroup, MDBIcon, MDBBtn, MDBSpinner } from 'mdb-react-ui-kit';
+import { auth } from '../firebase';
 
 export default function SearchBar({ onSearch, onReset }) {
   const [query, setQuery] = useState('');
@@ -13,7 +14,11 @@ export default function SearchBar({ onSearch, onReset }) {
     setError(null);
     try {
       console.log("called search function");
-      const response = await axios.get(`http://localhost:8080/api/vehicles/search?vehicleNumber=${query}`);
+      const idToken = await auth.currentUser.getIdToken();
+        console.log(idToken)
+        const response = await axios.get(`http://localhost:8080/api/vehicles/search?vehicleNumber=${query}`, {
+          headers: { Authorization: `Bearer ${idToken}` },
+         });
       console.log("searched successfully");
       onSearch(response.data);
     } catch (error) {
