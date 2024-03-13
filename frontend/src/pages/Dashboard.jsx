@@ -6,12 +6,11 @@ import SearchBar from "../components/SearchBar";
 import Sort from "../components/Sort";
 
 const Dashboard = () => {
- const [carData, setCarData] = useState([]);
- const [searchResults, setSearchResults] = useState([]);
- const [hasSearched, setHasSearched] = useState(false);
- const [sortedResults, setSortedResults] = useState([]); // State to hold sorted results
-
- useEffect(() => {
+  const [carData, setCarData] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [sortedResults, setSortedResults] = useState([]);
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/vehicles");
@@ -22,22 +21,27 @@ const Dashboard = () => {
     };
 
     fetchData();
- }, []);
+  }, []);
 
- const handleSearchResults = (results) => {
+  const handleSearchResults = (results) => {
     setSearchResults(results);
     setHasSearched(true);
- };
+  };
 
- const handleSortedResults = (sorted) => {
+  const handleSortedResults = (sorted) => {
     setSortedResults(sorted);
-    setHasSearched(true); 
- };
+    setHasSearched(true);
+  };
 
- 
- const displayData = hasSearched ? (sortedResults.length > 0 ? sortedResults : searchResults) : carData;
+  const resetSearchResults = () => {
+    setSearchResults([]);
+    setSortedResults([]);
+    setHasSearched(false);
+  };
 
- return (
+  const displayData = hasSearched ? (sortedResults.length > 0 ? sortedResults : searchResults) : carData;
+
+  return (
     <>
       <div style={{ display: "flex", flexDirection: "column", height: "100vh", backgroundColor: "#64B5F6" }}>
         <div>
@@ -45,7 +49,7 @@ const Dashboard = () => {
         </div>
 
         <div style={{ position: "absolute", top: "15vh", left: "25vw" }}>
-          <SearchBar onSearch={handleSearchResults} />
+          <SearchBar onSearch={handleSearchResults} onReset={resetSearchResults} />
         </div>
 
         <div style={{ position: "absolute", top: "25vh", left: "25vw" }}>
@@ -68,7 +72,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
- );
+  );
 };
 
 export default Dashboard;
