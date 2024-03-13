@@ -71,7 +71,21 @@ const Dashboard = () => {
             <Sort onSort={handleSortedResults} />
           </div>
 
-          <div style={{ margin: "10px", width: "35vw", position: "absolute", top: "310px", left: "70vh", zIndex: 2 }}>
+          <div style={{
+            margin: "10px",
+            width: "35vw",
+            position: "absolute",
+            top: "310px",
+            left: "70vh",
+            zIndex: 2,
+            maxHeight: "calc(100vh - 310px)",
+            overflowY: "scroll",
+            scrollbarWidth: "none", /* Firefox */
+            msOverflowStyle: "none", /* IE and Edge */
+            WebkitOverflowScrolling: "touch", /* Chrome, Safari, and Opera */
+            overflowX: "hidden",
+            paddingRight: "17px" /* To compensate for the hidden scrollbar */
+          }}>
             {Array.isArray(displayData) && displayData.length > 0 ? (
               displayData.map((car) => (
                 <Card
