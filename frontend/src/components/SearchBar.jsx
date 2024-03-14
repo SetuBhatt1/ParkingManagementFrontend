@@ -15,10 +15,10 @@ export default function SearchBar({ onSearch, onReset }) {
     try {
       console.log("called search function");
       const idToken = await auth.currentUser.getIdToken();
-        console.log(idToken)
-        const response = await axios.get(`http://localhost:8080/api/vehicles/search?vehicleNumber=${query}`, {
-          headers: { Authorization: `Bearer ${idToken}` },
-         });
+      console.log(idToken)
+      const response = await axios.get(`http://localhost:8080/api/vehicles/search?vehicleNumber=${query}`, {
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
       console.log("searched successfully");
       onSearch(response.data);
     } catch (error) {
