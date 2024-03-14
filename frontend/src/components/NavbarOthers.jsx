@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState} from "react";
 import {
     MDBContainer,
     MDBNavbar,
@@ -15,10 +15,20 @@ import {
     MDBDropdownItem,
 } from "mdb-react-ui-kit";
 
+import { useNavigate } from 'react-router-dom';
+
+
 export default function NavbarOthers() {
     const [openNavRight, setOpenNavRight] = useState(false);
     const [activeTab, setActiveTab] = useState("home");
     const [showModal, setShowModal] = useState(false);
+
+    const navigate=useNavigate();
+
+    const logout = () => {
+        navigate('/');
+    }
+    
 
     const handleClose = () => {
         setShowModal(false);
@@ -112,7 +122,7 @@ export default function NavbarOthers() {
                                     className="px-4 ms-2 me-1"
 
                                     style={{ backgroundColor: "#9FA8DA" }}
-                                    onClick={handleOpen}
+                                    onClick={logout}
                                 >
                                     <MDBNavbarLink>Logout</MDBNavbarLink>
                                 </MDBBtn>

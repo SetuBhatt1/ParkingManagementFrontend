@@ -10,20 +10,21 @@ import Floor2 from './pages/Floor2';
 import Navbar from './components/Navbar';
 import Modal from './components/Modal';
 import ProtectedRoute from './components/ProtectedRoute';
-
+ // Adjust the import path as necessary
 
 function App() {
  return (
     <>
       <Routes>
         <Route index element={<Home />} />
+        
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/floor0" element={<ProtectedRoute><Floor0 /></ProtectedRoute>} />
         <Route path="/floor1" element={<ProtectedRoute><Floor1 /></ProtectedRoute>} />
         <Route path="/floor2" element={<ProtectedRoute><Floor2 /></ProtectedRoute>} />
       </Routes>
     </>
-  );
+ );
 }
 
 export default App;
