@@ -21,7 +21,7 @@ const Home = () => {
                 </video> */}
                 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', height: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2 }}>
                     <LoginSignupButton />
-                    <AuthDetails/>
+                    {/* <AuthDetails/> */}
                 </div>
                 
             </div>

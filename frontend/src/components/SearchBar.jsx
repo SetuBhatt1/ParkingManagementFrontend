@@ -44,8 +44,8 @@ export default function SearchBar({ onSearch, onReset }) {
           value={query} onChange={e => setQuery(e.target.value)}
           aria-label="Search vehicles"
         />
-        <MDBBtn fas icon='search' size='1x' style={{ backgroundColor: "#7986CB", marginRight: "10px" }} type="submit">Search</MDBBtn>
-        <MDBBtn fas icon='times' size='1x' style={{ backgroundColor: "#7986CB" }} type="button" onClick={resetSearch}>Reset</MDBBtn>
+        <MDBBtn fas icon='search' size='1x' style={{ backgroundColor: "#90CAF9", marginRight: "10px" }} type="submit">Search</MDBBtn>
+        <MDBBtn fas icon='times' size='1x' style={{ backgroundColor: "#90CAF9" }} type="button" onClick={resetSearch}>Reset</MDBBtn>
       </MDBInputGroup>
       {isLoading && (
         <div className="spinner-container">

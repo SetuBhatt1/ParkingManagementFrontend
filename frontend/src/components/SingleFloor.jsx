@@ -90,7 +90,7 @@ export default function SingleFloor() {
             });
 
             console.log("Vehicle added successfully:", response.data);
-
+            // localStorage.setItem('parkedVehicle', carNumber);
             // Close the modal after successfully sending the data
             setIsAvailable(prevState => !prevState); // Toggle the state
             setBasicModal(false);

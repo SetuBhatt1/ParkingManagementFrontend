@@ -120,8 +120,8 @@ export default function NavbarOthers() {
                             <MDBNavbarItem>
                                 <MDBBtn
                                     className="px-4 ms-2 me-1"
-
-                                    style={{ backgroundColor: "#9FA8DA" }}
+                                    size="1x"
+                                    style={{ backgroundColor: "#90CAF9", fontSize:"15px", color:"#0D47A1"}}
                                     onClick={logout}
                                 >
                                     <MDBNavbarLink>Logout</MDBNavbarLink>
