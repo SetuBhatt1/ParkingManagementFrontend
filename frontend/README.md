@@ -19,11 +19,10 @@ Welcome to the Multi Floor Parking Management System! This project is a web appl
 - **Search Functionality:** Search for vehicles by name plate number (last four digits).
 - **Parking Details:** View parking details including car number and entry time for a given floor and slot.
 - **Filtering and Sorting:** Filter parking data by floor and date, and sort data as per requirements.
-- **Real-time Updates:** Automatically update parking status and availability.
 
 ## Tech Stack
-- **Backend:** Java, Spring Boot, Hibernate, MySQL
-- **Frontend:** React, HTML, CSS, JavaScript
+- **Backend:** Spring Boot, Hibernate, MySQL
+- **Frontend:** React
 
 ## Getting Started
 1. **Clone the repository:**
