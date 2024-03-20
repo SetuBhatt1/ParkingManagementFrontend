@@ -14,18 +14,24 @@ import {
 import { auth } from '../firebase';
 import axios from 'axios';
 
-export default function SingleFloor() {
+export default function SingleFloor({ floorNumber, slotNumber }) {
     const [basicModal, setBasicModal] = useState(false);
     const [carNumber, setCarNumber] = useState('');
     const [entryTime, setEntryTime] = useState('');
     const [exitTime, setExitTime] = useState('');
-    const [slotNumber, setSlotNumber] = useState('');
-    const [floorNumber, setFloorNumber] = useState('');
     const [isAvailable, setIsAvailable] = useState(true);
     const [slotStatus, setSlotStatus] = useState('');
     const [validationError, setValidationError] = useState('');
+    const [floorNumberState, setFloorNumber] = useState(''); // Define floorNumber state
+    const [slotNumberState, setSlotNumber] = useState(''); // Define slotNumber state
 
     const inputRef = useRef(null);
+
+    // Set initial floor and slot numbers
+    useEffect(() => {
+        setFloorNumber(floorNumber);
+        setSlotNumber(slotNumber);
+    }, [floorNumber, slotNumber]);
 
     useEffect(() => {
         const currentTime = new Date().toLocaleTimeString();
@@ -44,7 +50,7 @@ export default function SingleFloor() {
     const toggleOpen = () => setBasicModal(!basicModal);
 
     const fetchData = async () => {
-        const response = await fetch(`http://localhost:8080/api/slots/${slotNumber}`, {
+        const response = await fetch(`http://localhost:8080/api/slots/${slotNumberState}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -52,7 +58,7 @@ export default function SingleFloor() {
     };
 
     const validateInputs = () => {
-        if (!carNumber || !slotNumber || !floorNumber) {
+        if (!carNumber || !slotNumberState || !floorNumberState) {
             setValidationError('All fields are required.');
             return false;
         }
@@ -70,10 +76,10 @@ export default function SingleFloor() {
         }
 
         const slotData = {
-            slotNumber: slotNumber,
+            slotNumber: slotNumberState,
             status: 'occupied',
             floor: {
-                floorNumber: floorNumber
+                floorNumber: floorNumberState
             }
         };
 
@@ -83,15 +89,13 @@ export default function SingleFloor() {
                 vehicleNumber: carNumber,
                 slot: slotData,
                 floor: {
-                    floorNumber: floorNumber
+                    floorNumber: floorNumberState
                 }
             }, {
                 headers: { Authorization: `Bearer ${idToken}`, 'Content-Type': 'application/json' }
             });
 
             console.log("Vehicle added successfully:", response.data);
-            // localStorage.setItem('parkedVehicle', carNumber);
-            // Close the modal after successfully sending the data
             setIsAvailable(prevState => !prevState); // Toggle the state
             setBasicModal(false);
         } catch (error) {
@@ -159,22 +163,22 @@ export default function SingleFloor() {
                                     <MDBInput
                                         style={{ margin: "20px", padding: "10px" }}
                                         label="Slot Number"
-                                        value={slotNumber}
+                                        value={slotNumberState}
                                         onChange={(e) => setSlotNumber(e.target.value)}
                                         onBlur={fetchData}
                                     />
                                     <MDBInput
                                         style={{ margin: "20px", padding: "10px" }}
                                         label="Floor Number"
-                                        value={floorNumber}
+                                        value={floorNumberState}
                                         onChange={(e) => setFloorNumber(e.target.value)}
                                     />
                                 </>
                             ) : (
                                 <>
                                     <p style={{ margin: "20px", padding: "10px" }}>Car Number: {carNumber}</p>
-                                    <p style={{ margin: "20px", padding: "10px" }}>Slot Number: {slotNumber}</p>
-                                    <p style={{ margin: "20px", padding: "10px" }}>Floor Number: {floorNumber}</p>
+                                    <p style={{ margin: "20px", padding: "10px" }}>Slot Number: {slotNumberState}</p>
+                                    <p style={{ margin: "20px", padding: "10px" }}>Floor Number: {floorNumberState}</p>
                                 </>
                             )}
                         </MDBModalBody>
