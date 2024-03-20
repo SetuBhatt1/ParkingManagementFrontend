@@ -71,6 +71,7 @@ export default function SingleFloor({ floorNumber, slotNumber }) {
     };
 
     const sendDataOnPark = async () => {
+        console.log(`Attempting to park on floor: ${floorNumberState}`); 
         if (!validateInputs()) {
             return;
         }

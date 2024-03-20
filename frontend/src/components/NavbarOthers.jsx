@@ -1,4 +1,4 @@
-import React,{ useState} from "react";
+import React, { useState } from "react";
 import {
     MDBContainer,
     MDBNavbar,
@@ -14,21 +14,17 @@ import {
     MDBDropdownToggle,
     MDBDropdownItem,
 } from "mdb-react-ui-kit";
-
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function NavbarOthers() {
     const [openNavRight, setOpenNavRight] = useState(false);
-    const [activeTab, setActiveTab] = useState("home");
     const [showModal, setShowModal] = useState(false);
-
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const logout = () => {
         navigate('/');
     }
-    
 
     const handleClose = () => {
         setShowModal(false);
@@ -37,8 +33,9 @@ export default function NavbarOthers() {
         setShowModal(true);
     };
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
+    // Function to determine if a tab is active based on the current location
+    const isActiveTab = (path) => {
+        return location.pathname === path;
     };
 
     return (
@@ -62,8 +59,8 @@ export default function NavbarOthers() {
                         <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0 fs-5">
                             <MDBNavbarItem>
                                 <MDBNavbarLink
-                                    active={activeTab === "home"}
-                                    onClick={() => handleTabClick("home")}
+                                    active={isActiveTab("/")}
+                                    onClick={() => navigate("/")}
                                     href="/"
                                 >
                                     Home
@@ -71,8 +68,8 @@ export default function NavbarOthers() {
                             </MDBNavbarItem>
                             <MDBNavbarItem>
                                 <MDBNavbarLink
-                                    active={activeTab === "dashboard"}
-                                    onClick={() => handleTabClick("dashboard")}
+                                    active={isActiveTab("/dashboard")}
+                                    onClick={() => navigate("/dashboard")}
                                     href="/dashboard"
                                 >
                                     Dashboard
@@ -87,8 +84,8 @@ export default function NavbarOthers() {
                                         <MDBDropdownItem>
                                             <MDBNavbarLink
                                                 style={{ backgroundColor: "#7986CB" }}
-                                                active={activeTab === "floor0"}
-                                                onClick={() => handleTabClick("floor0")}
+                                                active={isActiveTab("/floor0")}
+                                                onClick={() => navigate("/floor0")}
                                                 href="/floor0"
                                             >
                                                 Floor 0
@@ -97,8 +94,8 @@ export default function NavbarOthers() {
                                         <MDBDropdownItem>
                                             <MDBNavbarLink
                                                 style={{ backgroundColor: "#7986CB" }}
-                                                active={activeTab === "floor1"}
-                                                onClick={() => handleTabClick("floor1")}
+                                                active={isActiveTab("/floor1")}
+                                                onClick={() => navigate("/floor1")}
                                                 href="/floor1"
                                             >
                                                 Floor 1
@@ -107,8 +104,8 @@ export default function NavbarOthers() {
                                         <MDBDropdownItem>
                                             <MDBNavbarLink
                                                 style={{ backgroundColor: "#7986CB" }}
-                                                active={activeTab === "floor2"}
-                                                onClick={() => handleTabClick("floor2")}
+                                                active={isActiveTab("/floor2")}
+                                                onClick={() => navigate("/floor2")}
                                                 href="/floor2"
                                             >
                                                 Floor 2
@@ -127,7 +124,6 @@ export default function NavbarOthers() {
                                     <MDBNavbarLink>Logout</MDBNavbarLink>
                                 </MDBBtn>
                             </MDBNavbarItem>
-
                         </MDBNavbarNav>
                     </MDBCollapse>
                 </MDBContainer>
