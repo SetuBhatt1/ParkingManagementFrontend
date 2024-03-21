@@ -13,6 +13,7 @@ Welcome to the Multi Floor Parking Management System! This project is a web appl
 ## Tech Stack
 - **Backend:** Spring Boot, Hibernate, MySQL
 - **Frontend:** React
+- **Authentication:** Firebase
 
 ## Getting Started
 1. **Clone the repository:**
